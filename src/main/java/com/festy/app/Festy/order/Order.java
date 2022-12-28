@@ -18,4 +18,6 @@ public class Order {
 
     private Date createdDate;
 
+    private Status status;
+
 }

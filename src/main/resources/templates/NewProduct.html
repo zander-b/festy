@@ -19,7 +19,7 @@
         <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}" ></option>
       </select>
 
-      <input type="text" th:field="*{fileLocation}" placeholder="File Location" class="form-control mb-4 col-4">
+      <input type="file" name="submittedImage" accept="image/*" class="form-control-file">
 
       <div  class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(categories)}">
         This is a danger alert—check it out!
