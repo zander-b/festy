@@ -1,6 +1,7 @@
 package com.festy.app.Festy.product;
 
 import com.festy.app.Festy.category.Category;
+import com.festy.app.Festy.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,13 @@ public class ProductController {
     @Autowired
     private ProductServices service;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping
     public String getDashboard(Model model){
         model.addAttribute("products",service.getAllProduct());
+
         return "ProductDashboard";
     }
 
@@ -25,6 +30,8 @@ public class ProductController {
 
         Product product = service.getProductById(id);
         model.addAttribute("product", product);
+        model.addAttribute("categories", categoryService.getAllCategories());
+
         return "UpdateProduct";
     }
 
@@ -35,7 +42,8 @@ public class ProductController {
         return "redirect:/product";
     }
     @GetMapping("/add")
-    public String newProduct(Model model, Product product){
+    public String newProduct(Model model, Product product, Category category){
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "NewProduct";
     }
 

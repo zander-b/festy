@@ -15,9 +15,17 @@
 
       <input type="text" th:field="*{price}" placeholder="Product Price" class="form-control mb-4 col-4">
 
+      <select th:field="*{category}">
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}" ></option>
+      </select>
+
       <input type="text" th:field="*{fileLocation}" placeholder="File Location" class="form-control mb-4 col-4">
 
-      <button type="submit" class="btn btn-info col-2"> Save Product</button>
+      <div  class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(categories)}">
+        This is a danger alert—check it out!
+      </div>
+
+      <button type="submit" class="btn btn-info col-2" th:unless="${#lists.isEmpty(categories)}"> Save Product</button>
     </form>
 
     <hr>
