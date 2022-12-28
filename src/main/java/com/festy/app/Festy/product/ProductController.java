@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("product")
@@ -20,7 +23,6 @@ public class ProductController {
     @GetMapping
     public String getDashboard(Model model){
         model.addAttribute("products",service.getAllProduct());
-
         return "ProductDashboard";
     }
 
@@ -36,9 +38,8 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String saveProduct(@ModelAttribute("product") Product product) {
-        System.out.println("saving"+product);
-        service.addProduct(product);
+    public String saveProduct(@ModelAttribute("product") Product product, @RequestParam("submittedImage") MultipartFile file) {
+        service.addProductWithImage(product,file);
         return "redirect:/product";
     }
     @GetMapping("/add")
