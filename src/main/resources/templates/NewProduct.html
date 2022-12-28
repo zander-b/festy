@@ -7,7 +7,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="container my-2">
+    <div class="container col-md-10 col-lg-8 col-sm-12 p-2 m-0 m-auto">
         <h2>Add Product</h2>
 
         <form action="/product/save" th:object="${product}" method="POST" enctype="multipart/form-data">
@@ -25,14 +25,17 @@
             <div class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(categories)}">
                 <p>Please add a category first. <a href="/category">Categories</a> </p>
             </div>
+            <br>
+            <div class="row">
+                <button type="submit" class="btn btn-info col-lg-10 ml-auto m-lg-auto" th:unless="${#lists.isEmpty(categories)}"> Save Product</button>
 
-            <button type="submit" class="btn btn-info col-2" th:unless="${#lists.isEmpty(categories)}"> Save Product
-            </button>
+            </div>
+
         </form>
 
         <hr>
 
-        <a href="/product"> Back to Product List</a>
+        <a href="/product" class="btn btn-dark"> Back to Product List</a>
     </div>
 </div>
 </body>
