@@ -7,22 +7,42 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="add-category">
-        <form action="#" th:action="@{/category}" th:object="${Category}" method="post">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input class="form-control" type="text" name="name" id="name" placeholder="Max 250 chars" required/>
-            </div>
-            <button class="btn btn-primary" type="submit"><i class="fas fa-plus" aria-hidden="true"></i> Add Category
-            </button>
-        </form>
-    </div>
-    <div class="list-category">
-        <div th:each="category: ${categories}" class="row">
-            <div class="col-3" th:text="${category.name}">item</div>
-            <div class="col-3"><a th:href="@{'/category/delete/'+${category.id}}">Delete</a></div>
+
+    <div class="container-fluid px-2 justify-content-center m-0">
+        <div class="add-category col-lg-10 justify-content-center mx-lg-auto">
+            <h3>Add Category</h3>
+            <form action="#" th:action="@{/category}" th:object="${Category}" method="post" class="m-2">
+                <div class="form-group m-1 col-lg-6 col-md-8">
+                    <label for="name">Name:</label>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Max 250 chars" required/>
+                </div>
+
+                <button class="btn btn-primary" type="submit"><i class="fas fa-plus" aria-hidden="true"></i> Add Category
+                </button>
+            </form>
         </div>
+        <hr/>
+        <br/>
+        <div class="table-responsive col-lg-11 justify-content-center mx-lg-auto">
+            <h3>Category List:</h3>
+            <table border="1" class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category: ${categories}">
+                    <td th:text="${category.name}"></td>
+                    <td class="col-2"><a th:href="@{'/category/delete/'+${category.id}}" class="btn btn-danger">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
+
 
 </div>
 
