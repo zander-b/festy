@@ -17,6 +17,7 @@
     <tr>
       <th>Product Name</th>
       <th>Product Price</th>
+      <th>Category</th>
       <th> Actions </th>
     </tr>
     </thead>
@@ -24,6 +25,7 @@
     <tr th:each="product : ${products}">
       <td th:text="${product.name}"></td>
       <td th:text="${product.price}"></td>
+      <td th:text="${product.category.name}"></td>
       <td> <a th:href="@{product/update/{id}(id=${product.id})}" class="btn btn-primary">Update</a>
         <a th:href="@{product/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a>
       </td>
