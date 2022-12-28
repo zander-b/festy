@@ -2,35 +2,38 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>Products</title>
+    <meta charset="UTF-8">
+    <title>Products</title>
 </head>
 <body>
 <div layout:fragment="content">
-  <div class="container my-2">
-    <h2>Add Product</h2>
+    <div class="container my-2">
+        <h2>Add Product</h2>
 
-    <form action="/product/save" th:object="${product}" method="POST">
-      <input type="text" th:field="*{name}" placeholder="Product Name" class="form-control mb-4 col-4">
+        <form action="/product/save" th:object="${product}" method="POST" enctype="multipart/form-data">
+            <input type="text" th:field="*{name}" placeholder="Product Name" class="form-control mb-4 col-4">
 
-      <input type="text" th:field="*{price}" placeholder="Product Price" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{price}" placeholder="Product Price" class="form-control mb-4 col-4">
 
-      <select th:field="*{category}">
-        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}" ></option>
-      </select>
+            <select th:field="*{category}">
+                <option th:each="category : ${categories}" th:value="${category.id}"
+                        th:text="${category.name}"></option>
+            </select>
 
-      <input type="file" name="submittedImage" accept="image/*" class="form-control-file">
+            <input type="file" name="submittedImage" accept="image/*" class="form-control-file">
 
-      <div  class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(categories)}">
-        This is a danger alert—check it out!
-      </div>
+            <div class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(categories)}">
+                This is a danger alert—check it out!
+            </div>
 
-      <button type="submit" class="btn btn-info col-2" th:unless="${#lists.isEmpty(categories)}"> Save Product</button>
-    </form>
+            <button type="submit" class="btn btn-info col-2" th:unless="${#lists.isEmpty(categories)}"> Save Product
+            </button>
+        </form>
 
-    <hr>
+        <hr>
 
-    <a href="/product"> Back to Product List</a>
-  </div>
+        <a href="/product"> Back to Product List</a>
+    </div>
+</div>
 </body>
 </html>
