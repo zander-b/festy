@@ -19,11 +19,9 @@ public class Product {
 
     @ManyToOne
     private Category category;
-    private String fileLocation;
+
     @ManyToOne
     private Image image;
-
-    //todo add categories
 
     public String getRawImage(){
         return Base64.getEncoder().encodeToString(ImageUtils.decompressImage(image.getImage()));

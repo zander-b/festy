@@ -1,5 +1,6 @@
 package com.festy.app.Festy.util;
 
+import com.festy.app.Festy.exception.ImageException;
 import com.festy.app.Festy.product.Image;
 import org.imgscalr.Scalr;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +9,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
@@ -34,7 +34,7 @@ public class ImageUtils {
         try {
             outputStream.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImageException(e);
         }
 
         return outputStream.toByteArray();
@@ -51,14 +51,14 @@ public class ImageUtils {
                 try {
                     count = inflater.inflate(tmp);
                 } catch (DataFormatException e) {
-                    throw new RuntimeException(e);
+                    throw new ImageException(e);
                 }
                 outputStream.write(tmp, 0, count);
             }
         try {
             outputStream.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImageException(e);
         }
 
         return outputStream.toByteArray();
@@ -70,7 +70,7 @@ public class ImageUtils {
         try {
             reducedImage = ImageUtils.resizeImage(file.getBytes(), getFileExtension(file.getOriginalFilename()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImageException(e);
         }
 
         return Image.builder()
@@ -91,7 +91,7 @@ public class ImageUtils {
         try {
             img = ImageIO.read(in);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImageException(e);
         }
         BufferedImage resizedImage = Scalr.resize(img,IMAGE_REDUCER_PIXELS_WIDTH);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -99,7 +99,7 @@ public class ImageUtils {
         try {
             ImageIO.write(resizedImage,extension,out);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImageException(e);
         }
 
         return out.toByteArray();
