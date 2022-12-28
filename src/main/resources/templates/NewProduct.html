@@ -23,7 +23,7 @@
             <input type="file" name="submittedImage" accept="image/*" class="form-control-file">
 
             <div class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(categories)}">
-                This is a danger alert—check it out!
+                <p>Please add a category first. <a href="/category">Categories</a> </p>
             </div>
 
             <button type="submit" class="btn btn-info col-2" th:unless="${#lists.isEmpty(categories)}"> Save Product
