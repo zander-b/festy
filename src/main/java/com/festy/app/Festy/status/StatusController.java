@@ -13,13 +13,6 @@ import java.util.Arrays;
 public class StatusController {
     @GetMapping
     String getPeople(Model model){
-//        model.addAttribute("something", "this is coming from the controller");
-//        model.addAttribute("people", Arrays.asList(
-//                new Person("Jhon", 26),
-//                new Person("James", 22),
-//                new Person("Bonny", 29)
-//
-//        ));
 
         return "status";
     }
