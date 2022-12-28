@@ -12,7 +12,7 @@ import java.util.Arrays;
 @RequestMapping("v1/status")
 public class StatusController {
     @GetMapping
-    String getPeople(Model model){
+    String getStatus(Model model){
 
         return "status";
     }
