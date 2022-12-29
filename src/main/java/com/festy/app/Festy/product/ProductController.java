@@ -24,16 +24,6 @@ public class ProductController {
         return "ProductDashboard";
     }
 
-    private ProductUpdateDTO convertResponse(Product product) {
-        return ProductUpdateDTO.builder()
-                .price(product.getPrice())
-                .id(product.getId())
-                .name(product.getName())
-                .category(product.getCategory())
-                .build();
-    }
-
-
     @GetMapping("/update/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
         Product product = service.getProductById(id);
@@ -51,7 +41,6 @@ public class ProductController {
     @PostMapping("/update")
     public String saveProduct(@ModelAttribute("product") ProductUpdateDTO updateDTO) {
         service.uppdateProduct(updateDTO);
-//        System.out.println(updateDTO);
         return "redirect:/product";
     }
 
