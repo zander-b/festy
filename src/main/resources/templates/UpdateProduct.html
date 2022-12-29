@@ -11,22 +11,25 @@
     <div class="container col-md-10 col-lg-8 col-sm-12 p-2 m-0 m-auto">
       <h2>Update Product</h2>
 
-      <form action="/product/save" th:object="${product}" method="POST">
+      <form action="/product/update" th:object="${ProductUpdateDTO}" method="POST" >
 
         <!-- Add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:value="${product.id}" name="id" />
 
-        <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+        <label for="product-name" class="form-label">Product Name</label>
+        <input id="product-name" type="text" th:value="${product.name}" class="form-control mb-4 col-4" name="name">
 
-        <input type="text" th:field="*{price}" class="form-control mb-4 col-4">
-
-        <div class="row">
-          <select th:field="*{category}" class="col-3 mb-4">
+        <div class="row mb-4">
+          <label for="product-category" class="form-label">Product Category</label>
+          <select id="product-category" class="col-3 mb-4" name="category">
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
-                    th:selected="(${product.category.id} == *{category.id})"></option>
+                    th:selected="(${product.category.id} == ${category.id})"></option>
           </select>
 
-          <button type="submit" class="btn btn-info col-lg-10 ml-auto m-lg-auto"> Update Product</button>
+        <label for="product-price" class="form-label">Product Price</label>
+        <input id="product-price" type="text" th:value="${product.price}" class="form-control mb-4 col-4" name="price">
+
+          <button type="submit" class="btn btn-primary col-sm-4 col-md-3 col-lg-3 ml-auto"> Update Product</button>
         </div>
       </form>
 

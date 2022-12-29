@@ -46,4 +46,20 @@ public class ProductServices {
     public void deleteProduct(Long id){
         repository.deleteById(id);
     }
+
+    public void uppdateProduct(ProductUpdateDTO productUpdateDTO) {
+        Optional< Product > optional = repository.findById(productUpdateDTO.getId());
+        Product product = null;
+        if (optional.isPresent()) {
+            product = optional.get();
+        } else {
+            throw new RuntimeException(" product not found for id :: " + productUpdateDTO.getId());
+        }
+
+        product.setName(productUpdateDTO.getName());
+        product.setCategory(productUpdateDTO.getCategory());
+        product.setPrice(productUpdateDTO.getPrice());
+        repository.save(product);
+    }
+
 }
