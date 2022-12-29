@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @Controller
 @RequestMapping("product")
 public class ProductController {
@@ -26,14 +24,11 @@ public class ProductController {
         return "ProductDashboard";
     }
 
-
     @GetMapping("/update/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
-
         Product product = service.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("categories", categoryService.getAllCategories());
-
         return "UpdateProduct";
     }
 
@@ -42,6 +37,13 @@ public class ProductController {
         service.addProductWithImage(product,file);
         return "redirect:/product";
     }
+
+    @PostMapping("/update")
+    public String saveProduct(@ModelAttribute("product") ProductUpdateDTO updateDTO) {
+        service.uppdateProduct(updateDTO);
+        return "redirect:/product";
+    }
+
     @GetMapping("/add")
     public String newProduct(Model model, Product product, Category category){
         model.addAttribute("categories", categoryService.getAllCategories());

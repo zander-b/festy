@@ -11,26 +11,36 @@
         <h2>Add Product</h2>
 
         <form action="/product/save" th:object="${product}" method="POST" enctype="multipart/form-data">
-            <input type="text" th:field="*{name}" placeholder="Product Name" class="form-control mb-4 col-4">
 
-            <input type="text" th:field="*{price}" placeholder="Product Price" class="form-control mb-4 col-4">
+            <label for="product-name" class="form-label">Product Name:</label>
+            <input id="product-name" type="text" th:field="*{name}" placeholder="Product Name"
+                   class="form-control mb-4 col-4">
 
-            <select th:field="*{category}">
-                <option th:each="category : ${categories}" th:value="${category.id}"
-                        th:text="${category.name}"></option>
-            </select>
+            <div class="mb-4">
+                <label for="select-category" class="form-label">Product Category:</label>
+                <select id="select-category" th:field="*{category}">
+                    <option th:each="category : ${categories}" th:value="${category.id}"
+                            th:text="${category.name}"></option>
+                </select>
+            </div>
 
-            <input type="file" name="submittedImage" accept="image/*" class="form-control-file">
+            <label for="product-price" class="form-label">Product Price:</label>
+            <input id="product-price" type="text" th:field="*{price}" placeholder="Product Price"
+                   class="form-control mb-4 col-4">
+
+            <div class="mb-4">
+                <label for="product-image" class="form-label">Product Image:</label>
+                <input id="product-image" type="file" name="submittedImage" accept="image/*" class="form-control-file">
+            </div>
 
             <div class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(categories)}">
                 <p>Please add a category first. <a href="/category">Categories</a> </p>
             </div>
             <br>
             <div class="row">
-                <button type="submit" class="btn btn-info col-lg-10 ml-auto m-lg-auto" th:unless="${#lists.isEmpty(categories)}"> Save Product</button>
-
+                <button type="submit" class="btn btn-primary col-sm-4 col-md-3 col-lg-3 mx-sm-auto"
+                        th:unless="${#lists.isEmpty(categories)}"> Save Product</button>
             </div>
-
         </form>
 
         <hr>
